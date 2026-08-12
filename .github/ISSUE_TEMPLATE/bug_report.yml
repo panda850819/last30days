@@ -16,7 +16,7 @@ body:
       label: Steps to Reproduce
       description: How can we reproduce this?
       placeholder: |
-        1. Run `python3 skills/last30days/scripts/last30days.py "topic" --emit=compact`
+        1. Run `bun skills/last30days/src/cli.ts "topic" --json`
         2. ...
     validations:
       required: true
@@ -30,8 +30,8 @@ body:
   - type: textarea
     id: traceback
     attributes:
-      label: Error / Traceback
-      description: Paste the full traceback or error output.
+      label: Error output
+      description: Paste the full error output.
       render: text
   - type: dropdown
     id: install

@@ -1,0 +1,25 @@
+{
+  "name": "@panda850819/last30days",
+  "version": "3.18.4",
+  "description": "Focused Bun research engine for the last 30 days",
+  "type": "module",
+  "repository": "https://github.com/panda850819/last30days",
+  "homepage": "https://github.com/panda850819/last30days",
+  "license": "MIT",
+  "bin": {
+    "last30days": "./skills/last30days/src/cli.ts"
+  },
+  "scripts": {
+    "dev": "bun skills/last30days/src/cli.ts",
+    "test": "bun test",
+    "typecheck": "bunx tsc --noEmit",
+    "check": "bun run typecheck && bun test"
+  },
+  "devDependencies": {
+    "@types/bun": "latest",
+    "typescript": "^5.9.3"
+  },
+  "engines": {
+    "bun": ">=1.3.0"
+  }
+}

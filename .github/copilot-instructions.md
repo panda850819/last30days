@@ -1,38 +1,17 @@
-This file contains Copilot-specific additions. See AGENTS.md for the shared cross-tool governance layer.
+See `AGENTS.md` for repository-wide guidance.
 
-# Copilot-specific guidance
+## Tests
 
-## Test generation
+- Use `bun:test` for generated tests.
+- Inject fake command runners or fetchers instead of calling live services.
+- Run `bun run check`, `bun audit`, `bun pm pack --dry-run`, and `git diff --check` before proposing a PR.
 
-- Prefer unittest.TestCase for generated tests to match the existing test suite.
-- Mock external calls with unittest.mock.patch.
+## Skill integration
 
-## Pull request reminders
+A CLI capability is incomplete until `skills/last30days/SKILL.md` documents the agent workflow. Test the direct CLI with JSON output:
 
-Before suggesting a pull request:
+```bash
+bun skills/last30days/src/cli.ts "Bun runtime" --json
+```
 
-- Confirm that pytest passes.
-- For changes that belong in the next release notes, add a `changelog.d/<n>.<type>.md` fragment (do not edit `CHANGELOG.md` or bump version manifests). See `CONTRIBUTING.md` / `AGENTS.md` § Changelog and releases and fill the PR template’s Agent disclosure + Relationship sections.
-- If changes were made anywhere under skills/last30days/, confirm the install copy has been refreshed with:
-
-npx skills add . -g -y
-
-## Vendor exclusion zone
-
-- Never suggest changes to skills/last30days/scripts/lib/vendor/.
-- Treat skills/last30days/scripts/lib/vendor/ as a no-touch zone.
-
-## CI expectations
-
-GitHub CI runs:
-
-- pytest
-- ruff
-
-Generated changes should pass both before review is requested.
-
-## CLI examples
-
-When suggesting CLI usage examples for safe local testing, default to:
-
---emit=compact --mock
+Do not weaken consent, historical-window, subprocess timeout, or public-URL protections.

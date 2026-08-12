@@ -1,0 +1,1 @@
+Replaced the former runtime with a focused Bun and TypeScript research engine, removed secondary runtime dependencies, added consent-aware diagnostics, and added explicit package-managed Agent Skill links.

@@ -1,0 +1,14 @@
+# Publish only the focused Bun package surface.
+*
+!package.json
+!bun.lock
+!tsconfig.json
+!LICENSE
+!README.md
+!skills/
+skills/*
+!skills/last30days/
+skills/last30days/*
+!skills/last30days/SKILL.md
+!skills/last30days/src/
+!skills/last30days/src/**

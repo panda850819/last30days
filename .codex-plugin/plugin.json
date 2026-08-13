@@ -1,14 +1,13 @@
 {
   "name": "last30days",
   "version": "3.18.4",
-  "description": "Research any topic across Reddit, X, YouTube, TikTok, Instagram, Hacker News, Polymarket, GitHub, and the web.",
+  "description": "Focused recent-public-evidence research across X, Reddit, YouTube, Hacker News, GitHub, Polymarket, and the web.",
   "author": {
-    "name": "Matt Van Horn",
-    "email": "mvanhorn@gmail.com",
-    "url": "https://github.com/mvanhorn"
+    "name": "panda850819",
+    "url": "https://github.com/panda850819"
   },
-  "homepage": "https://github.com/mvanhorn/last30days-skill",
-  "repository": "https://github.com/mvanhorn/last30days-skill",
+  "homepage": "https://github.com/panda850819/last30days",
+  "repository": "https://github.com/panda850819/last30days",
   "license": "MIT",
   "keywords": [
     "competitor research",
@@ -16,32 +15,29 @@
     "reddit",
     "twitter",
     "youtube",
-    "tiktok",
-    "instagram",
+    "hacker-news",
     "trends",
     "prompts",
     "polymarket",
     "github",
-    "perplexity",
-    "threads",
-    "pinterest",
-    "hacker-news"
+    "web",
+    "bun"
   ],
   "skills": "./skills/",
   "interface": {
     "displayName": "last30days",
     "shortDescription": "Research what people are saying about a topic now.",
-    "longDescription": "last30days adds a Codex skill for researching any topic based on recent discussion and engagement signals across Reddit, X, YouTube, TikTok, Instagram, Hacker News, Polymarket, GitHub, and the web.",
-    "developerName": "Matt Van Horn",
+    "longDescription": "last30days adds a focused Bun skill for researching recent public evidence and engagement signals across X, Reddit, YouTube, Hacker News, GitHub, Polymarket, and the web.",
+    "developerName": "panda850819",
     "category": "Research",
     "capabilities": [
       "Interactive",
       "Read",
       "Write"
     ],
-    "websiteURL": "https://github.com/mvanhorn/last30days-skill",
+    "websiteURL": "https://github.com/panda850819/last30days",
     "defaultPrompt": [
-      "TikTok shop trends",
+      "AI agent trends",
       "Codex vs Cursor",
       "best travel credit cards"
     ],

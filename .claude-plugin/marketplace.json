@@ -1,8 +1,8 @@
 {
   "name": "last30days-skill",
   "owner": {
-    "name": "Matt Van Horn",
-    "url": "https://github.com/mvanhorn"
+    "name": "panda850819",
+    "url": "https://github.com/panda850819"
   },
   "metadata": {
     "description": "Marketplace hosting the last30days research plugin."
@@ -10,15 +10,15 @@
   "plugins": [
     {
       "name": "last30days",
-      "description": "Research any topic across Reddit, X, YouTube, TikTok, Instagram, Hacker News, Polymarket, GitHub, and 5+ more sources. AI agent scores by upvotes, likes, and real money - not editors.",
+      "description": "Focused recent-public-evidence research across X, Reddit, YouTube, Hacker News, GitHub, Polymarket, and the web.",
       "version": "3.18.4",
       "author": {
-        "name": "Matt Van Horn",
-        "url": "https://github.com/mvanhorn"
+        "name": "panda850819",
+        "url": "https://github.com/panda850819"
       },
       "source": "./",
       "category": "productivity",
-      "homepage": "https://github.com/mvanhorn/last30days-skill"
+      "homepage": "https://github.com/panda850819/last30days"
     }
   ]
 }

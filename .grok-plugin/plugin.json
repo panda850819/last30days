@@ -1,18 +1,19 @@
 {
   "name": "last30days",
   "version": "3.18.4",
-  "description": "Research any topic across Reddit, X, YouTube, TikTok, Instagram, Hacker News, Polymarket, GitHub, and 5+ more sources. AI agent scores by upvotes, likes, and real money - not editors.",
+  "description": "Focused recent-public-evidence research across X, Reddit, YouTube, Hacker News, GitHub, Polymarket, and the web.",
   "author": {
-    "name": "Matt Van Horn",
-    "email": "mvanhorn@gmail.com",
-    "url": "https://github.com/mvanhorn"
+    "name": "panda850819",
+    "url": "https://github.com/panda850819"
   },
-  "homepage": "https://github.com/mvanhorn/last30days-skill",
-  "repository": "https://github.com/mvanhorn/last30days-skill",
+  "homepage": "https://github.com/panda850819/last30days",
+  "repository": "https://github.com/panda850819/last30days",
   "license": "MIT",
   "keywords": [
     "last30days",
-    "last 30 days"
+    "last 30 days",
+    "research",
+    "bun"
   ],
   "skills": "./skills/"
 }

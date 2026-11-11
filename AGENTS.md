@@ -6,12 +6,7 @@ Focused Agent Skill and Bun/TypeScript CLI for researching recent public evidenc
 
 - `skills/last30days/SKILL.md`: canonical agent-facing runtime contract
 - `skills/last30days/src/cli.ts`: Bun CLI entrypoint
-- `skills/last30days/src/core/`: source contract, pipeline, ranking, rendering, safety, and date windows
-- `skills/last30days/src/sources/`: source implementations
-- `skills/last30days/src/readers/`: bounded public-page extraction
 - `test/`: Bun contract, pipeline, safety, and E2E tests
-- `CONFIGURATION.md`: user-facing flags, consent, source availability, and Skill links
-- `changelog.d/`: release-note fragments
 
 ## Orientation
 

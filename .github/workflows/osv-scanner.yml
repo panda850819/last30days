@@ -8,7 +8,7 @@ on:
 permissions: {}
 
 jobs:
-  # Report-only, like the previous fail-on-vuln: false; scanner errors still fail.
+  # Report-only: findings never fail the job; scanner errors do.
   scan-scheduled:
     runs-on: ${{ (github.event_name == 'pull_request' && github.event.pull_request.head.repo.full_name != github.repository) && 'ubuntu-latest' || fromJSON('["self-hosted","lab","public-isolated"]') }}
     timeout-minutes: 5

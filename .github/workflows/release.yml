@@ -17,6 +17,7 @@ env:
   RELEASE_TAG: ${{ github.event_name == 'workflow_dispatch' && inputs.tag || github.ref_name }}
 
 jobs:
+  # Stays on GitHub-hosted: build provenance attestations come from GitHub-hosted runners.
   release:
     runs-on: ubuntu-latest
     permissions:

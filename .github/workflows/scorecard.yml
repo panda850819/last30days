@@ -24,6 +24,7 @@ on:
 permissions: read-all
 
 jobs:
+  # Stays on GitHub-hosted: publishing Scorecard results requires a GitHub-hosted runner.
   analysis:
     name: Scorecard analysis
     runs-on: ubuntu-latest

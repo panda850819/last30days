@@ -10,7 +10,8 @@ permissions: {}
 
 jobs:
   bun-tests:
-    runs-on: ubuntu-latest
+    runs-on: ${{ (github.event_name == 'pull_request' && github.event.pull_request.head.repo.full_name != github.repository) && 'ubuntu-latest' || fromJSON('["self-hosted","lab","public-isolated"]') }}
+    timeout-minutes: 10
     permissions:
       contents: read
     steps:
@@ -26,6 +27,22 @@ jobs:
 
       - name: Install dependencies
         run: bun install --frozen-lockfile
+
+      # Entity-resolution tests take the gh code path only when gh is on PATH; GitHub-hosted
+      # images ship it, the lab runner does not.
+      - name: Ensure gh CLI on PATH
+        env:
+          GH_VERSION: '2.105.0'
+          GH_SHA256: '79e7ab5db738c48777b696e374f8b428f0647debfb424f44d2f426370407fe2f'
+        run: |
+          set -euo pipefail
+          if command -v gh >/dev/null; then gh --version | head -1; exit 0; fi
+          asset="gh_${GH_VERSION}_linux_amd64.tar.gz"
+          curl --fail --silent --show-error --location --proto '=https' --output "$RUNNER_TEMP/$asset" \
+            "https://github.com/cli/cli/releases/download/v${GH_VERSION}/${asset}"
+          echo "${GH_SHA256}  $RUNNER_TEMP/$asset" | sha256sum --check --strict
+          tar -xzf "$RUNNER_TEMP/$asset" -C "$RUNNER_TEMP"
+          echo "$RUNNER_TEMP/gh_${GH_VERSION}_linux_amd64/bin" >> "$GITHUB_PATH"
 
       - name: Run focused Bun checks
         run: bun run check

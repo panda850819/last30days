@@ -8,11 +8,56 @@ on:
 permissions: {}
 
 jobs:
+  # Report-only, like the previous fail-on-vuln: false; scanner errors still fail.
   scan-scheduled:
-    uses: google/osv-scanner-action/.github/workflows/osv-scanner-reusable.yml@9a498708959aeaef5ef730655706c5a1df1edbc2 # v2.3.8
+    runs-on: ${{ (github.event_name == 'pull_request' && github.event.pull_request.head.repo.full_name != github.repository) && 'ubuntu-latest' || fromJSON('["self-hosted","lab","public-isolated"]') }}
+    timeout-minutes: 5
     permissions:
-      actions: read
       contents: read
-      security-events: write
-    with:
-      fail-on-vuln: false
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - name: OSV-Scanner v2.3.8 (sha256-verified; scanner errors fail the job)
+        env:
+          OSV_VERSION: '2.3.8'
+          OSV_SHA256: 'bc98e15319ed0d515e3f9235287ba53cdc5535d576d24fd573978ecfe9ab92dc'
+          OSV_BLOCK_HIGH: 'false'
+        run: |
+          set -euo pipefail
+          bin="$RUNNER_TEMP/osv-scanner"
+          curl --fail --silent --show-error --location --proto '=https' --output "$bin" \
+            "https://github.com/google/osv-scanner/releases/download/v${OSV_VERSION}/osv-scanner_linux_amd64"
+          echo "${OSV_SHA256}  $bin" | sha256sum --check --strict
+          chmod +x "$bin"
+          set +e
+          "$bin" scan source --recursive --allow-no-lockfiles --format json \
+            --output-file "$RUNNER_TEMP/osv.json" ./
+          code=$?
+          set -e
+          # osv-scanner exits 0 when clean and 1 when it found vulnerabilities; anything else is an error.
+          if [ "$code" -ne 0 ] && [ "$code" -ne 1 ]; then
+            echo "::error::osv-scanner failed with exit code $code"
+            exit 1
+          fi
+          python3 - "$RUNNER_TEMP/osv.json" <<'PY'
+          import json, os, sys
+          data = json.load(open(sys.argv[1]))
+          total, high = 0, []
+          for result in data.get("results") or []:
+              for pkg in result.get("packages") or []:
+                  for group in pkg.get("groups") or []:
+                      total += 1
+                      try:
+                          score = float(group.get("max_severity") or 0)
+                      except ValueError:
+                          score = 0.0
+                      if score >= 7.0:
+                          name = pkg["package"]["name"]
+                          version = pkg["package"].get("version", "?")
+                          high.append(f"{result['source']['path']}: {name}@{version} {group['ids'][0]} CVSS {score}")
+          print(f"osv: {total} vulnerability groups, {len(high)} high/critical (CVSS >= 7.0)")
+          for line in high:
+              print(f"::warning::{line}")
+          sys.exit(1 if high and os.environ["OSV_BLOCK_HIGH"] == "true" else 0)
+          PY

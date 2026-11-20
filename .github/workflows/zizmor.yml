@@ -9,6 +9,7 @@ on:
 permissions: {}
 
 jobs:
+  # zizmor-action pulls and runs a Docker image; stays on GitHub-hosted (no docker on lab public runners).
   zizmor:
     runs-on: ubuntu-latest
     permissions:
